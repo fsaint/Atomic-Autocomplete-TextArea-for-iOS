@@ -44,5 +44,6 @@
 -(void)loadItems:(NSArray *)newItems;
 -(void)deleteItemWithBubble:(ACBubble *)bb;
 -(NSArray *)getSelectedItems;
+-(void)checkInItem;
 
 @end

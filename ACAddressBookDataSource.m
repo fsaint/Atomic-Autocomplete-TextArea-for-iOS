@@ -70,8 +70,6 @@
                 el.last_name = lastName ;
                 el.email =  ABMultiValueCopyValueAtIndex(emails,email_index);
                 [filtered addObject:el];
-
-            
             }
         }	
     }

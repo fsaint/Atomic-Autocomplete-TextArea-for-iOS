@@ -74,12 +74,22 @@
     return self;
 }
 
--(void)addItem:(NSString *)it{
+-(NSString *)nameForItem:(id)item{
+    if ([[item class] isSubclassOfClass:[NSString class]]){
+        return (NSString *)item;
+    }else{
+        id<ACAutoCompleteElement>el = (id<ACAutoCompleteElement>)item;
+        return [el getDisplayText];
+    }
+    
+}
+
+-(void)addItem:(id<ACAutoCompleteElement>)it{
     [items addObject:it];
     ACBubble *b = [[ACBubble alloc] initWithFrame:CGRectZero];
     b.textarea = self;
     [b setFont:font];
-    [b setLabelText:it];
+    [b setLabelText:[self nameForItem:it]];
     [bubbles addObject:b];
     [self addSubview:b];
     [b release];
@@ -103,6 +113,9 @@
     UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
     
     UIView *mainSubviewOfWindow = window.rootViewController.view;
+    
+    if (!mainSubviewOfWindow)
+        mainSubviewOfWindow = [[window subviews] lastObject];
     CGRect window_fr = [mainSubviewOfWindow convertRect:fr fromView:self];
     
     if (keyboardFrame.origin.y != 0.0)
@@ -138,15 +151,6 @@
     [self deleteItem:index];
 }
 
--(NSString *)nameForItem:(id)item{
-    if ([[item class] isSubclassOfClass:[NSString class]]){
-        return (NSString *)item;
-    }else{
-        id<ACAutoCompleteElement>el = (id<ACAutoCompleteElement>)item;
-        return [el getDisplayText];
-    }
-
-}
 
 -(void)layoutSubviews{
     int row = 0;
@@ -181,12 +185,21 @@
 }
 
 -(void)checkInItem{
+    
+    if ([text.text length]==0)
+        return;
     [self addItem:text.text];
+    text.text = @"";
+    [self setNeedsLayout];
+}
+-(void)checkInItem:(id)obj{
+    [self addItem:obj];
     text.text = @"";
     [self setNeedsLayout];
 }
 -(void)fireAutoComplete:(NSString *)search{
     [autoCompleteDataSource getSuggestionsFor:search withCallback:^(NSArray *arr){
+       
         self.filtered_autocomp = arr;
         [autocomplete reloadData];
         if ([arr count]>0)
@@ -263,9 +276,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *ac = [self nameForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
-    text.text = ac;
-    [self checkInItem];
+    id object = [filtered_autocomp objectAtIndex:indexPath.row];
+    [self checkInItem:object];
     [self hideAutoTable];
 }
 

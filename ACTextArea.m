@@ -95,6 +95,10 @@
     [b release];
 
 }
+-(BOOL)resignFirstResponder{
+    [text resignFirstResponder];
+    return [super resignFirstResponder];
+}
 -(void)loadItems:(NSArray *)newItems{
    
     for (int i=0;i<[newItems count];i++){
@@ -210,6 +214,7 @@
    
 }
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [font release];
     [text release];
     [bubbles release];

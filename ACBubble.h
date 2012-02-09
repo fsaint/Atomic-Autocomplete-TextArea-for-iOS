@@ -28,6 +28,6 @@
 
 -(void)setLabelText:(NSString *)s;
 -(void)setFont:(UIFont *)font;
--(void)deleteItemWithBubble:(ACBubble *)bb;
+//-(void)deleteItemWithBubble:(ACBubble *)bb;
 
 @end

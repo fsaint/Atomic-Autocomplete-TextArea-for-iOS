@@ -12,6 +12,12 @@
 #define AC_SPACING 2.0
 #define AC_CELL_HEIGHT 40.0
 
+@interface ACTextArea ()
+
+-(void)hideAutoTable;
+
+@end
+
 @implementation ACTextArea
 @synthesize font;
 @synthesize autoCompleteDataSource;
@@ -23,6 +29,7 @@
     text = [[UITextView alloc] initWithFrame:CGRectZero];
     text.autocorrectionType = UITextAutocorrectionTypeNo;
     text.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    text.keyboardType = UIKeyboardTypeEmailAddress;
     [self addSubview:text];
     text.delegate = self;
     self.font = [UIFont systemFontOfSize:18.0];
@@ -192,7 +199,7 @@
     
     if ([text.text length]==0)
         return;
-    [self addItem:text.text];
+    [self addItem:(id<ACAutoCompleteElement>)text.text];
     text.text = @"";
     [self setNeedsLayout];
 }

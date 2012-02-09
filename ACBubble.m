@@ -8,6 +8,8 @@
 
 #import "ACBubble.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ACTextArea.h"
+
 @implementation ACBubble
 @synthesize textarea;
 @synthesize selected;

@@ -123,10 +123,7 @@
     
     UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
     
-    UIView *mainSubviewOfWindow = window.rootViewController.view;
-    
-    if (!mainSubviewOfWindow)
-        mainSubviewOfWindow = [[window subviews] lastObject];
+    UIView *mainSubviewOfWindow = [[window subviews] lastObject];
     CGRect window_fr = [mainSubviewOfWindow convertRect:fr fromView:self];
     
     if (keyboardFrame.origin.y != 0.0)

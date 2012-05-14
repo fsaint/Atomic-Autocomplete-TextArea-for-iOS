@@ -45,5 +45,6 @@
 -(void)deleteItemWithBubble:(ACBubble *)bb;
 -(NSArray *)getSelectedItems;
 -(void)checkInItem;
+-(void)hideAutoTable;
 
 @end

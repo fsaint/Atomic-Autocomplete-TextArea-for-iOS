@@ -12,6 +12,12 @@
 #define AC_SPACING 2.0
 #define AC_CELL_HEIGHT 40.0
 
+@interface ACTextArea ()
+
+-(void)hideAutoTable;
+
+@end
+
 @implementation ACTextArea
 @synthesize font;
 @synthesize autoCompleteDataSource;
@@ -77,11 +83,41 @@
 -(NSString *)nameForItem:(id)item{
     if ([[item class] isSubclassOfClass:[NSString class]]){
         return (NSString *)item;
-    }else{
-        id<ACAutoCompleteElement>el = (id<ACAutoCompleteElement>)item;
-        return [el getDisplayText];
     }
-    
+    else
+    {
+        id<ACAutoCompleteElement>el = (id<ACAutoCompleteElement>)item;        
+        
+        NSString *fullUserInfo = [el getDisplayText];
+        NSRange emailRange = [fullUserInfo rangeOfString:@"<"];
+
+        if (emailRange.location == NSNotFound) 
+            return fullUserInfo;        
+        else 
+            return [fullUserInfo substringToIndex:emailRange.location];
+    }
+}
+
+-(NSString *)emailForItem:(id)item
+{
+    if ([[item class] isSubclassOfClass:[NSString class]]){
+        return (NSString *)item;
+    }
+    else
+    {
+        id<ACAutoCompleteElement>el = (id<ACAutoCompleteElement>)item;        
+        
+        NSString *fullUserInfo = [el getDisplayText];
+        NSRange emailRange = [fullUserInfo rangeOfString:@"<"];
+        
+        if (emailRange.location == NSNotFound) 
+            return @"";        
+        else 
+        {
+            NSString *subString = [fullUserInfo substringWithRange:NSMakeRange(0, [fullUserInfo length] - 1)];
+            return [subString substringFromIndex:emailRange.location + 1];
+        }
+    }
 }
 
 -(void)addItem:(id<ACAutoCompleteElement>)it{
@@ -89,7 +125,15 @@
     ACBubble *b = [[ACBubble alloc] initWithFrame:CGRectZero];
     b.textarea = self;
     [b setFont:font];
-    [b setLabelText:[self nameForItem:it]];
+    
+    NSRange emailRange = [[self nameForItem:it] rangeOfString:@"<"];
+    if (emailRange.location == NSNotFound) {
+        [b setLabelText:[self nameForItem:it]];
+    }
+    else {
+        [b setLabelText:[[self nameForItem:it] substringToIndex:emailRange.location]];
+    }
+    
     [bubbles addObject:b];
     [self addSubview:b];
     [b release];
@@ -116,10 +160,7 @@
     
     UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
     
-    UIView *mainSubviewOfWindow = window.rootViewController.view;
-    
-    if (!mainSubviewOfWindow)
-        mainSubviewOfWindow = [[window subviews] lastObject];
+    UIView *mainSubviewOfWindow = [[window subviews] lastObject];
     CGRect window_fr = [mainSubviewOfWindow convertRect:fr fromView:self];
     
     if (keyboardFrame.origin.y != 0.0)
@@ -160,6 +201,7 @@
     int row = 0;
     CGFloat x_advance=AC_SPACING/2.0;
     for (int i=0;i<[items count];i++){
+        
         NSString *it = [self nameForItem:[items objectAtIndex:i]];
         
         
@@ -192,7 +234,7 @@
     
     if ([text.text length]==0)
         return;
-    [self addItem:text.text];
+    [self addItem:(id<ACAutoCompleteElement>)text.text];
     text.text = @"";
     [self setNeedsLayout];
 }
@@ -272,11 +314,11 @@
     static NSString *cell_name = @"AUTOCOMPLETE CELL";
     cell = [tableView dequeueReusableCellWithIdentifier:cell_name];
     if (cell == nil){
-        cell  = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell_name] autorelease];
+        cell  = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cell_name] autorelease];
     }
     
-    NSString *ac =[self nameForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
-    cell.textLabel.text = ac;
+    cell.textLabel.text = [self nameForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
+    cell.detailTextLabel.text = [self emailForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
     return cell;
 }
 

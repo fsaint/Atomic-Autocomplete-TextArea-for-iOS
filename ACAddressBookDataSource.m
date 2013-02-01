@@ -83,8 +83,8 @@
         contacts = [[NSMutableArray alloc] init];
         filtered = [[NSMutableArray alloc] init];
         
-        ABAddressBookRef addressBook = ABAddressBookCreate();	
-       contacts = (NSMutableArray*)ABAddressBookCopyArrayOfAllPeople(addressBook);
+        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+        contacts = (NSMutableArray*)ABAddressBookCopyArrayOfAllPeople(addressBook);
        // [contacts sortUsingFunction:(int(*)(id, id, void*))ABPersonComparePeopleByName context:(void*)ABPersonGetSortOrdering()];
 
     }

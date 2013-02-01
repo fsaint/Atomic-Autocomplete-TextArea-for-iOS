@@ -37,7 +37,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         text_label = [[UILabel alloc] initWithFrame:CGRectZero];
         text_label.backgroundColor = [UIColor clearColor];
         text_label.textColor = [UIColor whiteColor];
-        text_label.textAlignment = UITextAlignmentRight;
+        text_label.textAlignment = NSTextAlignmentRight;
         [self addSubview:text_label];
         self.backgroundColor = [UIColor clearColor];
         

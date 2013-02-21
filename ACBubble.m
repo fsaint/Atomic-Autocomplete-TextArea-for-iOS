@@ -107,13 +107,13 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     NSArray *colors = nil;
    
         colors = [NSArray arrayWithObjects:
-                  (__bridge id)BCONTEXT_ORANGE.CGColor,
-                  (__bridge id)BCONTEXT_ORANGE.CGColor,
+                  ( id)BCONTEXT_ORANGE.CGColor,
+                  ( id)BCONTEXT_ORANGE.CGColor,
                   nil];
     
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFTypeRef)colors, NULL);
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, ( CFTypeRef)colors, NULL);
     CGColorSpaceRelease(colorSpace);
     
     CGContextDrawLinearGradient(ctx, gradient, CGPointZero, CGPointMake(0, CGRectGetHeight(self.bounds)), 0);

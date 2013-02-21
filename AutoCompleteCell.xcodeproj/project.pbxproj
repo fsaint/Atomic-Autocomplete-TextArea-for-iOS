@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5B66431C154787E300E3D6ED /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B66431A154787E300E3D6ED /* close.png */; };
 		5B66431D154787E300E3D6ED /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B66431B154787E300E3D6ED /* close@2x.png */; };
+		5BCE485816D677A0001BC153 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCE485716D677A0001BC153 /* Default-568h@2x.png */; };
 		B53BE98814DA782000013535 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98714DA782000013535 /* UIKit.framework */; };
 		B53BE98A14DA782000013535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98914DA782000013535 /* Foundation.framework */; };
 		B53BE98C14DA782000013535 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98B14DA782000013535 /* CoreGraphics.framework */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		5B66431A154787E300E3D6ED /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		5B66431B154787E300E3D6ED /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		5BCE485716D677A0001BC153 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B53BE98314DA782000013535 /* AutoCompleteCell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoCompleteCell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53BE98714DA782000013535 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B53BE98914DA782000013535 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -103,6 +105,7 @@
 		B53BE97814DA782000013535 = {
 			isa = PBXGroup;
 			children = (
+				5BCE485716D677A0001BC153 /* Default-568h@2x.png */,
 				B53BEA0614DAB49C00013535 /* AddressBook.framework */,
 				B53BE9BF14DA788400013535 /* AutocompleteTextArea */,
 				B53BE98D14DA782000013535 /* AutoCompleteCell */,
@@ -270,6 +273,7 @@
 				B53BEA0214DA97C600013535 /* 37-circle-x@2x.png in Resources */,
 				5B66431C154787E300E3D6ED /* close.png in Resources */,
 				5B66431D154787E300E3D6ED /* close@2x.png in Resources */,
+				5BCE485816D677A0001BC153 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

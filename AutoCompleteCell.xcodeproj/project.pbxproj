@@ -109,7 +109,6 @@
 			children = (
 				5B91D6BF165D23740002F8AF /* Default-568h@2x.png */,
 				5BCE485716D677A0001BC153 /* Default-568h@2x.png */,
-				B53BEA0614DAB49C00013535 /* AddressBook.framework */,
 				B53BE9BF14DA788400013535 /* AutocompleteTextArea */,
 				B53BE98D14DA782000013535 /* AutoCompleteCell */,
 				B53BE9AE14DA782000013535 /* AutoCompleteCellTests */,
@@ -130,6 +129,7 @@
 		B53BE98614DA782000013535 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B53BEA0614DAB49C00013535 /* AddressBook.framework */,
 				B53BE98714DA782000013535 /* UIKit.framework */,
 				B53BE98914DA782000013535 /* Foundation.framework */,
 				B53BE98B14DA782000013535 /* CoreGraphics.framework */,

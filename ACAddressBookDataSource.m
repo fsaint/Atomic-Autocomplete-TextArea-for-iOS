@@ -80,7 +80,7 @@
         ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
         contacts = (NSMutableArray*)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
        // [contacts sortUsingFunction:(int(*)(id, id, void*))ABPersonComparePeopleByName context:(void*)ABPersonGetSortOrdering()];
-        CFRelease(addressBook);
+        //CFRelease(addressBook);
     }
     return self;
 }

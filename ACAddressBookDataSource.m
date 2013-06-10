@@ -40,9 +40,8 @@
 		
 		ABRecordRef contact =  (__bridge ABRecordRef)([contacts objectAtIndex:i]);
 		
-        NSString *lastName,*firstName;
-        lastName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
-        firstName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
+        NSString *lastName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
+        NSString *firstName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
 			
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF contains[cd] %@)", searchText];
         
@@ -58,14 +57,15 @@
             // Add All emails
             ABMultiValueRef emails = ABRecordCopyValue(contact, kABPersonEmailProperty);
             int count = ABMultiValueGetCount(emails);
-            for (int email_index = 0;email_index<count;email_index++){
+            for (int email_index = 0; email_index < count; email_index++){
                 ACAddressBookElement *el = [[ACAddressBookElement alloc] init];
                 el.first_name = firstName;
                 el.last_name = lastName ;
-                el.email =  (__bridge NSString *)(ABMultiValueCopyValueAtIndex(emails,email_index));
+                el.email =  CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails,email_index));
                 [filtered addObject:el];
             }
-        }	
+            if (emails) CFRelease(emails);
+        }
     }
 }
 
@@ -80,7 +80,7 @@
         ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
         contacts = (NSMutableArray*)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
        // [contacts sortUsingFunction:(int(*)(id, id, void*))ABPersonComparePeopleByName context:(void*)ABPersonGetSortOrdering()];
-
+        CFRelease(addressBook);
     }
     return self;
 }

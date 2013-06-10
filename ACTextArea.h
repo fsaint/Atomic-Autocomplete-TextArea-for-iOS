@@ -38,9 +38,9 @@
     CGRect keyboardFrame;
 }
 
-@property (nonatomic, readwrite, retain) NSArray *filtered_autocomp;
-@property (nonatomic, readwrite, retain) id<ACAutoCompleteDataSource> autoCompleteDataSource;
-@property (nonatomic, readwrite, retain) UIFont *font;
+@property (nonatomic, readwrite, strong) NSArray *filtered_autocomp;
+@property (nonatomic, readwrite, strong) id<ACAutoCompleteDataSource> autoCompleteDataSource;
+@property (nonatomic, readwrite, strong) UIFont *font;
 -(void)loadItems:(NSArray *)newItems;
 -(void)deleteItemWithBubble:(ACBubble *)bb;
 -(NSArray *)getSelectedItems;

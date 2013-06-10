@@ -137,7 +137,6 @@
     
     [bubbles addObject:b];
     [self addSubview:b];
-    [b release];
 
 }
 -(BOOL)resignFirstResponder{
@@ -258,11 +257,6 @@
 }
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [font release];
-    [text release];
-    [bubbles release];
-    [items release];
-    [super dealloc];
 }
 
 -(NSArray *)getSelectedItems{
@@ -328,7 +322,7 @@
     static NSString *cell_name = @"AUTOCOMPLETE CELL";
     cell = [tableView dequeueReusableCellWithIdentifier:cell_name];
     if (cell == nil){
-        cell  = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cell_name] autorelease];
+        cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cell_name];
     }
     
     if (indexPath.row < [filtered_autocomp count]) {

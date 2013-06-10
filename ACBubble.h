@@ -19,11 +19,11 @@
     UIColor *ac_text_color;
     UIColor *ac_background_selected;
 }
-@property (nonatomic, readwrite, retain) ACTextArea *textarea;
+@property (nonatomic, readwrite, strong) ACTextArea *textarea;
 @property (nonatomic, readwrite, assign, getter=isSelected,setter = setSelected:) BOOL selected;
-@property (nonatomic, readwrite, retain) UIColor *ac_background_color;
-@property (nonatomic, readwrite, retain) UIColor *ac_text_color;
-@property (nonatomic, readwrite, retain) UIColor *ac_background_selected;
+@property (nonatomic, readwrite, strong) UIColor *ac_background_color;
+@property (nonatomic, readwrite, strong) UIColor *ac_text_color;
+@property (nonatomic, readwrite, strong) UIColor *ac_background_selected;
 
 
 -(void)setLabelText:(NSString *)s;

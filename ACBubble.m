@@ -46,7 +46,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         // delete button
         delete_button = [UIButton buttonWithType:UIButtonTypeCustom];
         [delete_button setImage:[UIImage imageNamed:@"close@2x"] forState:UIControlStateNormal];
-        [delete_button retain];
         delete_button.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
         [delete_button addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:delete_button];
@@ -103,17 +102,15 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     CGContextSaveGState(ctx);
     CGContextAddPath(ctx, path.CGPath);
     CGContextClip(ctx);
-    
-    NSArray *colors = nil;
-   
-        colors = [NSArray arrayWithObjects:
-                  ( id)BCONTEXT_ORANGE.CGColor,
-                  ( id)BCONTEXT_ORANGE.CGColor,
-                  nil];
+       
+    NSArray * colors = [NSArray arrayWithObjects:
+                        ( id)BCONTEXT_ORANGE.CGColor,
+                        ( id)BCONTEXT_ORANGE.CGColor,
+                        nil];
     
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, ( CFTypeRef)colors, NULL);
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge  CFTypeRef)colors, NULL);
     CGColorSpaceRelease(colorSpace);
     
     CGContextDrawLinearGradient(ctx, gradient, CGPointZero, CGPointMake(0, CGRectGetHeight(self.bounds)), 0);
@@ -130,19 +127,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 -(void)deleteButtonPressed:(UIButton *)b{
     [textarea deleteItemWithBubble:self];
-}
--(void)dealloc{
-    
-    [ac_background_color release];
-    [ac_text_color release];
-    [ac_background_selected release];
-    [ac_background_color release];
-    [ac_text_color release];
-    [ac_background_selected release];
-    [textarea release];
-    [delete_button release];
-    [text_label release];
-    [super dealloc];
 }
 
 @end

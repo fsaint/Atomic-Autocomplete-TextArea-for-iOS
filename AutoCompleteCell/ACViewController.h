@@ -12,5 +12,5 @@
     ACTextArea *textArea;
 }
 
-@property (nonatomic, readwrite, retain) IBOutlet ACTextArea *textArea;
+@property (nonatomic, readwrite, strong) IBOutlet ACTextArea *textArea;
 @end

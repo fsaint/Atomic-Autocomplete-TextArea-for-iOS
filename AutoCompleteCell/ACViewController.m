@@ -8,7 +8,7 @@
 
 #import "ACViewController.h"
 #import "ACAddressBookDataSource.h"
-
+#import "ACArrayDataSource.h"
 @implementation ACViewController
 @synthesize textArea;
 
@@ -25,7 +25,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [textArea loadItems:[NSArray arrayWithObjects:@"Felipe Saint-Jean",@"Test User",@"Jack", nil]];
-    textArea.autoCompleteDataSource = [[ACAddressBookDataSource alloc] init];
+    
+    ACArrayDataSource *arr = [[ACArrayDataSource alloc] initWithObjects:@[@{@"name":@"Felipe Saint-Jean"},@{@"name":@"Domino"}] displayKey:@"name"];
+    textArea.autoCompleteDataSource = arr;
+    
+    //[[ACAddressBookDataSource alloc] init];
 }
 
 - (void)viewDidUnload

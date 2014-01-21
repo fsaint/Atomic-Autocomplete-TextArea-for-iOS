@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5B91D6C0165D23740002F8AF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B91D6BF165D23740002F8AF /* Default-568h@2x.png */; };
-		5B09F542176622360063017E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B09F541176622360063017E /* Default-568h@2x.png */; };
-		5B66431C154787E300E3D6ED /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B66431A154787E300E3D6ED /* close.png */; };
-		5B66431D154787E300E3D6ED /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B66431B154787E300E3D6ED /* close@2x.png */; };
 		B53BE98814DA782000013535 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98714DA782000013535 /* UIKit.framework */; };
 		B53BE98A14DA782000013535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98914DA782000013535 /* Foundation.framework */; };
 		B53BE98C14DA782000013535 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98B14DA782000013535 /* CoreGraphics.framework */; };
@@ -24,15 +21,16 @@
 		B53BE9C514DA8AD500013535 /* ACBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BE9C414DA8AD500013535 /* ACBubble.m */; };
 		B53BEA0514DAAFEC00013535 /* ACAddressBookDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BEA0414DAAFEB00013535 /* ACAddressBookDataSource.m */; };
 		B53BEA0714DAB49C00013535 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BEA0614DAB49C00013535 /* AddressBook.framework */; };
+		B5BDC657188F15E90087FCA3 /* ACArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BDC656188F15E90087FCA3 /* ACArrayDataSource.m */; };
 		B5E4AC2A188EEB0200AB23DA /* delete_sign.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E4AC29188EEB0200AB23DA /* delete_sign.png */; };
 		B5E4AC2C188EEB0A00AB23DA /* delete_sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E4AC2B188EEB0A00AB23DA /* delete_sign@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5B91D6BF165D23740002F8AF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5B09F541176622360063017E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		5B66431A154787E300E3D6ED /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		5B66431B154787E300E3D6ED /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		5B91D6BF165D23740002F8AF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B53BE98314DA782000013535 /* AutoCompleteCell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoCompleteCell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53BE98714DA782000013535 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B53BE98914DA782000013535 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -55,6 +53,8 @@
 		B53BEA0314DAAFEB00013535 /* ACAddressBookDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAddressBookDataSource.h; sourceTree = "<group>"; };
 		B53BEA0414DAAFEB00013535 /* ACAddressBookDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAddressBookDataSource.m; sourceTree = "<group>"; };
 		B53BEA0614DAB49C00013535 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B5BDC655188F15E90087FCA3 /* ACArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACArrayDataSource.h; sourceTree = "<group>"; };
+		B5BDC656188F15E90087FCA3 /* ACArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACArrayDataSource.m; sourceTree = "<group>"; };
 		B5E4AC29188EEB0200AB23DA /* delete_sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_sign.png; sourceTree = "<group>"; };
 		B5E4AC2B188EEB0A00AB23DA /* delete_sign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_sign@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,8 +126,6 @@
 				5B09F541176622360063017E /* Default-568h@2x.png */,
 				5B66431A154787E300E3D6ED /* close.png */,
 				5B66431B154787E300E3D6ED /* close@2x.png */,
-				B53BE9FF14DA97C600013535 /* 37-circle-x.png */,
-				B53BEA0014DA97C600013535 /* 37-circle-x@2x.png */,
 				B53BE98F14DA782000013535 /* AutoCompleteCell-Info.plist */,
 				B53BE99014DA782000013535 /* InfoPlist.strings */,
 				B53BE99314DA782000013535 /* main.m */,
@@ -145,6 +143,8 @@
 				B53BE9C414DA8AD500013535 /* ACBubble.m */,
 				B53BEA0314DAAFEB00013535 /* ACAddressBookDataSource.h */,
 				B53BEA0414DAAFEB00013535 /* ACAddressBookDataSource.m */,
+				B5BDC655188F15E90087FCA3 /* ACArrayDataSource.h */,
+				B5BDC656188F15E90087FCA3 /* ACArrayDataSource.m */,
 			);
 			name = AutocompleteTextArea;
 			sourceTree = "<group>";
@@ -208,19 +208,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53BE9A414DA782000013535 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B53BE9B314DA782000013535 /* InfoPlist.strings in Resources */,
-				B53BEA0114DA97C600013535 /* 37-circle-x.png in Resources */,
-				B53BEA0214DA97C600013535 /* 37-circle-x@2x.png in Resources */,
-				5B66431C154787E300E3D6ED /* close.png in Resources */,
-				5B66431D154787E300E3D6ED /* close@2x.png in Resources */,
-				5B09F542176622360063017E /* Default-568h@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -233,6 +220,7 @@
 				B53BE9A114DA782000013535 /* ACViewController.m in Sources */,
 				B53BE9C214DA78B000013535 /* ACTextArea.m in Sources */,
 				B53BE9C514DA8AD500013535 /* ACBubble.m in Sources */,
+				B5BDC657188F15E90087FCA3 /* ACArrayDataSource.m in Sources */,
 				B53BEA0514DAAFEC00013535 /* ACAddressBookDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,42 +333,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		B53BE9BD14DA782000013535 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AutoCompleteCell.app/AutoCompleteCell";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AutoCompleteCell/AutoCompleteCell-Prefix.pch";
-				INFOPLIST_FILE = "AutoCompleteCellTests/AutoCompleteCellTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		B53BE9BE14DA782000013535 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AutoCompleteCell.app/AutoCompleteCell";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AutoCompleteCell/AutoCompleteCell-Prefix.pch";
-				INFOPLIST_FILE = "AutoCompleteCellTests/AutoCompleteCellTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

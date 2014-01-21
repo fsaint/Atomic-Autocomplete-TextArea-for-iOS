@@ -33,8 +33,9 @@
     text.delegate = self;
     self.font = [UIFont systemFontOfSize:18.0];
     text.font = self.font;
-    text.contentInset = UIEdgeInsetsMake(1.0, 1.0, 6.0, 0.0);
-
+    //text.contentInset = UIEdgeInsetsMake(1.0, 1.0, 12.0, 0.0);
+    [text  setTextContainerInset:UIEdgeInsetsMake(4, 1, 0.0, 0)];
+    
       
     autocomplete = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     autocomplete.delegate = self;
@@ -136,7 +137,6 @@
     
     [bubbles addObject:b];
     [self addSubview:b];
-    [b release];
 
 }
 -(BOOL)resignFirstResponder{
@@ -208,7 +208,8 @@
         ACBubble *b = [bubbles objectAtIndex:i];
         
         CGSize z =[it sizeWithFont:self.font constrainedToSize:CGSizeMake(300.0, AC_TEXT_HEIGHT)];
-        CGFloat w = z.width + AC_TEXT_HEIGHT  /* <- this is space for the button that is a square AC_TEXT_HEIGHT x AC_TEXT_HEIGHT*/ + 2.0 /* <- for the inner padding*/;
+        CGFloat w = z.width + AC_TEXT_HEIGHT  /* <- this is space for the button that is a square AC_TEXT_HEIGHT x AC_TEXT_HEIGHT*/ + 18.0 /* <- for the inner padding*/;
+        w  = ceilf(w);
         CGFloat x_loc = x_advance + AC_SPACING;
         if (x_advance + w > self.bounds.size.width){
             x_advance =w + AC_SPACING;
@@ -257,11 +258,6 @@
 }
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [font release];
-    [text release];
-    [bubbles release];
-    [items release];
-    [super dealloc];
 }
 
 -(NSArray *)getSelectedItems{
@@ -314,7 +310,7 @@
     static NSString *cell_name = @"AUTOCOMPLETE CELL";
     cell = [tableView dequeueReusableCellWithIdentifier:cell_name];
     if (cell == nil){
-        cell  = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cell_name] autorelease];
+        cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cell_name];
     }
     
     cell.textLabel.text = [self nameForItem:[filtered_autocomp objectAtIndex:indexPath.row]];

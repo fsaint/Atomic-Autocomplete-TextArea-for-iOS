@@ -36,17 +36,19 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         // text label
         text_label = [[UILabel alloc] initWithFrame:CGRectZero];
         text_label.backgroundColor = [UIColor clearColor];
-        text_label.textColor = [UIColor whiteColor];
+        text_label.textColor = [UIColor blueColor];
         text_label.textAlignment = UITextAlignmentRight;
+        text_label.font = [UIFont boldSystemFontOfSize:12.0];
         [self addSubview:text_label];
         self.backgroundColor = [UIColor clearColor];
         
-        self.layer.cornerRadius = 5.0;
+       // self.layer.cornerRadius = 5.0;
         
         // delete button
         delete_button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [delete_button setImage:[UIImage imageNamed:@"close@2x"] forState:UIControlStateNormal];
-        [delete_button retain];
+        UIImage *im = [[UIImage imageNamed:@"delete_sign"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        delete_button.tintColor = [UIColor whiteColor];
+        [delete_button setImage:im forState:UIControlStateNormal];
         delete_button.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
         [delete_button addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:delete_button];
@@ -60,14 +62,17 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 -(void)setSelected:(BOOL)sel{
     selected = sel;
     if (sel){
-        self.backgroundColor = [UIColor clearColor];
+        delete_button.hidden = NO;
+        text_label.textColor = [UIColor whiteColor];
         
     }
     else{
-        self.backgroundColor = [UIColor clearColor];
+        text_label.textColor = [UIColor blueColor];
+        delete_button.hidden = YES;
     }
     text_label.backgroundColor = self.backgroundColor;
-        
+ 
+    [self setNeedsDisplay];
 }
 
 -(void)setFont:(UIFont *)font{
@@ -83,7 +88,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     delete_button.frame = CGRectInset(CGRectMake(frame.size.width - frame.size.height, 0.0, frame.size.height, frame.size.height),4.0,4.0);
     
     CGRect labelRect = text_label.frame;
-    labelRect.size.width = labelRect.size.width + (delete_button.frame.origin.x - labelRect.size.width)/2;
+    labelRect.size.width =   labelRect.size.width + (delete_button.frame.origin.x - labelRect.size.width)/2;
     text_label.frame = labelRect;
 }
 
@@ -95,54 +100,30 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    CGFloat radius = CGRectGetHeight(self.bounds) / 1.5;
+    CGFloat radius = CGRectGetHeight(self.bounds) /8.0;
     
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:radius];
+    //UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:radius];
     
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(ctx);
-    CGContextAddPath(ctx, path.CGPath);
-    CGContextClip(ctx);
+    NSLog(@"%@",NSStringFromCGRect(CGRectInset(self.bounds, 1.0, 1.0)));
     
-    NSArray *colors = nil;
-   
-        colors = [NSArray arrayWithObjects:
-                  ( id)BCONTEXT_ORANGE.CGColor,
-                  ( id)BCONTEXT_ORANGE.CGColor,
-                  nil];
-    
-    
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, ( CFTypeRef)colors, NULL);
-    CGColorSpaceRelease(colorSpace);
-    
-    CGContextDrawLinearGradient(ctx, gradient, CGPointZero, CGPointMake(0, CGRectGetHeight(self.bounds)), 0);
-    CGGradientRelease(gradient);
-    CGContextRestoreGState(ctx);
-    
-    [BCONTEXT_ORANGE set];
-    
-    
-    path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds, 1.0, 1.0) cornerRadius:radius];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds, 1.0, 1.0) cornerRadius:radius];
     [path setLineWidth:1.0];
-    [path stroke];
-}
+    if (self.selected){
+        [[UIColor blueColor] setFill];
 
+        [path fill];
+    }else{
+        [[UIColor blueColor]  setStroke];
+
+        [path stroke];
+    }
+}
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    self.selected =!self.selected;
+
+}
 -(void)deleteButtonPressed:(UIButton *)b{
     [textarea deleteItemWithBubble:self];
-}
--(void)dealloc{
-    
-    [ac_background_color release];
-    [ac_text_color release];
-    [ac_background_selected release];
-    [ac_background_color release];
-    [ac_text_color release];
-    [ac_background_selected release];
-    [textarea release];
-    [delete_button release];
-    [text_label release];
-    [super dealloc];
 }
 
 @end

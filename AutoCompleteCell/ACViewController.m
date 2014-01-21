@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [textArea loadItems:[NSArray arrayWithObjects:@"Felipe Saint-Jean",@"Carolina Silva Cassorla",@"Jack", nil]];
+    [textArea loadItems:[NSArray arrayWithObjects:@"Felipe Saint-Jean",@"Test User",@"Jack", nil]];
     textArea.autoCompleteDataSource = [[ACAddressBookDataSource alloc] init];
 }
 

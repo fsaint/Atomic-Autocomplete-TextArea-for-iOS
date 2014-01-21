@@ -26,12 +26,6 @@
         return self.email; 
     
 }
--(void)dealloc{
-    [first_name release];
-    [last_name release];
-    [email release];
-    [super dealloc];
-}
     
 @end
 
@@ -44,12 +38,12 @@
     
 	for (int i=0; i<[contacts count]; i++) {
 		
-		ABRecordRef contact =  [contacts objectAtIndex:i];
+		ABRecordRef contact =  (__bridge ABRecordRef)([contacts objectAtIndex:i]);
 		
         NSString *lastName,*firstName;
-        lastName  = (NSString *)ABRecordCopyValue(contact, kABPersonLastNameProperty);
-        firstName  = (NSString *)ABRecordCopyValue(contact, kABPersonFirstNameProperty);
-			
+        lastName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
+        firstName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
+      //  email      = (NSString *)ABRecordCopyValue(contact, kABPer)
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF contains[cd] %@)", searchText];
         
         
@@ -68,7 +62,7 @@
                 ACAddressBookElement *el = [[ACAddressBookElement alloc] init];
                 el.first_name = firstName;
                 el.last_name = lastName ;
-                el.email =  ABMultiValueCopyValueAtIndex(emails,email_index);
+                el.email =  (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emails,email_index);
                 [filtered addObject:el];
             }
         }	
@@ -83,8 +77,15 @@
         contacts = [[NSMutableArray alloc] init];
         filtered = [[NSMutableArray alloc] init];
         
-        ABAddressBookRef addressBook = ABAddressBookCreate();	
-       contacts = (NSMutableArray*)ABAddressBookCopyArrayOfAllPeople(addressBook);
+        ABAddressBookRef addressBook = ABAddressBookCreate();
+      // contacts = (NSMutableArray*)ABAddressBookCopyArrayOfAllPeople(addressBook);
+        
+
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef err){
+            if (granted)
+                contacts = (NSMutableArray*)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
+            //CFRelease(addressBook);
+        });
        // [contacts sortUsingFunction:(int(*)(id, id, void*))ABPersonComparePeopleByName context:(void*)ABPersonGetSortOrdering()];
 
     }
@@ -100,9 +101,4 @@
     
 }
 
--(void)dealloc{
-    [contacts release];
-    [filtered release];
-    [super dealloc];
-}
 @end

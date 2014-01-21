@@ -15,9 +15,9 @@
     NSString *email;
     
 }
-@property (nonatomic, readwrite, retain) NSString *first_name;
-@property (nonatomic, readwrite, retain) NSString *last_name;
-@property (nonatomic, readwrite, retain) NSString *email;
+@property (nonatomic, readwrite, strong) NSString *first_name;
+@property (nonatomic, readwrite, strong) NSString *last_name;
+@property (nonatomic, readwrite, strong) NSString *email;
 @end
 
 @interface ACAddressBookDataSource : NSObject <ACAutoCompleteDataSource>{

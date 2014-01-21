@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ACTextArea.h"
 
-@interface ACDictionaryObject : NSObject <ACAutoCompleteElement>
+@interface ACDictionaryObject : NSObject
 @property (nonatomic,strong) NSDictionary *values;
 @property (nonatomic,strong) NSString *display_key;
 

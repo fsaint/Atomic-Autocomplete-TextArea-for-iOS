@@ -90,7 +90,11 @@
     {
         id<ACAutoCompleteElement>el = (id<ACAutoCompleteElement>)item;        
         
-        NSString *fullUserInfo = [el getDisplayText];
+        NSString *fullUserInfo;
+        if ([el respondsToSelector:@selector(getDisplayText)])
+            fullUserInfo = [el getDisplayText];
+        else
+            fullUserInfo = [el description];
         NSRange emailRange = [fullUserInfo rangeOfString:@"<"];
 
         if (emailRange.location == NSNotFound) 
@@ -109,7 +113,13 @@
     {
         id<ACAutoCompleteElement>el = (id<ACAutoCompleteElement>)item;        
         
-        NSString *fullUserInfo = [el getDisplayText];
+        NSString *fullUserInfo;
+        if ([el respondsToSelector:@selector(getDisplayText)])
+            fullUserInfo = [el getDisplayText];
+        else
+            fullUserInfo = [el description];
+        
+        
         NSRange emailRange = [fullUserInfo rangeOfString:@"<"];
         
         if (emailRange.location == NSNotFound) 

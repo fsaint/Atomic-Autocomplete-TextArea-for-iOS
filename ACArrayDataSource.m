@@ -8,7 +8,7 @@
 
 #import "ACArrayDataSource.h"
 @implementation ACDictionaryObject
--(NSString *)getDisplayText{
+-(NSString *)description{
     return [self.values objectForKey:self.display_key];
 }
 @end

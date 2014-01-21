@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5B91D6C0165D23740002F8AF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B91D6BF165D23740002F8AF /* Default-568h@2x.png */; };
+		5B09F542176622360063017E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B09F541176622360063017E /* Default-568h@2x.png */; };
+		5B66431C154787E300E3D6ED /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B66431A154787E300E3D6ED /* close.png */; };
+		5B66431D154787E300E3D6ED /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B66431B154787E300E3D6ED /* close@2x.png */; };
 		B53BE98814DA782000013535 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98714DA782000013535 /* UIKit.framework */; };
 		B53BE98A14DA782000013535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98914DA782000013535 /* Foundation.framework */; };
 		B53BE98C14DA782000013535 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98B14DA782000013535 /* CoreGraphics.framework */; };
@@ -17,11 +20,6 @@
 		B53BE99B14DA782000013535 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53BE99914DA782000013535 /* MainStoryboard_iPhone.storyboard */; };
 		B53BE99E14DA782000013535 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53BE99C14DA782000013535 /* MainStoryboard_iPad.storyboard */; };
 		B53BE9A114DA782000013535 /* ACViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BE9A014DA782000013535 /* ACViewController.m */; };
-		B53BE9A914DA782000013535 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE9A814DA782000013535 /* SenTestingKit.framework */; };
-		B53BE9AA14DA782000013535 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98714DA782000013535 /* UIKit.framework */; };
-		B53BE9AB14DA782000013535 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BE98914DA782000013535 /* Foundation.framework */; };
-		B53BE9B314DA782000013535 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B53BE9B114DA782000013535 /* InfoPlist.strings */; };
-		B53BE9B614DA782000013535 /* AutoCompleteCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BE9B514DA782000013535 /* AutoCompleteCellTests.m */; };
 		B53BE9C214DA78B000013535 /* ACTextArea.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BE9C114DA78B000013535 /* ACTextArea.m */; };
 		B53BE9C514DA8AD500013535 /* ACBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BE9C414DA8AD500013535 /* ACBubble.m */; };
 		B53BEA0514DAAFEC00013535 /* ACAddressBookDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BEA0414DAAFEB00013535 /* ACAddressBookDataSource.m */; };
@@ -30,18 +28,11 @@
 		B5E4AC2C188EEB0A00AB23DA /* delete_sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E4AC2B188EEB0A00AB23DA /* delete_sign@2x.png */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		B53BE9AC14DA782000013535 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B53BE97A14DA782000013535 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B53BE98214DA782000013535;
-			remoteInfo = AutoCompleteCell;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		5B91D6BF165D23740002F8AF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5B09F541176622360063017E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		5B66431A154787E300E3D6ED /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		5B66431B154787E300E3D6ED /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		B53BE98314DA782000013535 /* AutoCompleteCell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoCompleteCell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53BE98714DA782000013535 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B53BE98914DA782000013535 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -56,12 +47,7 @@
 		B53BE99D14DA782000013535 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		B53BE99F14DA782000013535 /* ACViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACViewController.h; sourceTree = "<group>"; };
 		B53BE9A014DA782000013535 /* ACViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACViewController.m; sourceTree = "<group>"; };
-		B53BE9A714DA782000013535 /* AutoCompleteCellTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutoCompleteCellTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53BE9A814DA782000013535 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		B53BE9B014DA782000013535 /* AutoCompleteCellTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoCompleteCellTests-Info.plist"; sourceTree = "<group>"; };
-		B53BE9B214DA782000013535 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B53BE9B414DA782000013535 /* AutoCompleteCellTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoCompleteCellTests.h; sourceTree = "<group>"; };
-		B53BE9B514DA782000013535 /* AutoCompleteCellTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteCellTests.m; sourceTree = "<group>"; };
 		B53BE9C014DA78B000013535 /* ACTextArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTextArea.h; sourceTree = "<group>"; };
 		B53BE9C114DA78B000013535 /* ACTextArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACTextArea.m; sourceTree = "<group>"; };
 		B53BE9C314DA8AD500013535 /* ACBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACBubble.h; sourceTree = "<group>"; };
@@ -85,27 +71,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53BE9A314DA782000013535 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B53BE9A914DA782000013535 /* SenTestingKit.framework in Frameworks */,
-				B53BE9AA14DA782000013535 /* UIKit.framework in Frameworks */,
-				B53BE9AB14DA782000013535 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B53BE97814DA782000013535 = {
 			isa = PBXGroup;
 			children = (
-				5B91D6BF165D23740002F8AF /* Default-568h@2x.png */,
-				B53BEA0614DAB49C00013535 /* AddressBook.framework */,
 				B53BE9BF14DA788400013535 /* AutocompleteTextArea */,
 				B53BE98D14DA782000013535 /* AutoCompleteCell */,
-				B53BE9AE14DA782000013535 /* AutoCompleteCellTests */,
 				B53BE98614DA782000013535 /* Frameworks */,
 				B53BE98414DA782000013535 /* Products */,
 			);
@@ -115,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				B53BE98314DA782000013535 /* AutoCompleteCell.app */,
-				B53BE9A714DA782000013535 /* AutoCompleteCellTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +95,7 @@
 		B53BE98614DA782000013535 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B53BEA0614DAB49C00013535 /* AddressBook.framework */,
 				B53BE98714DA782000013535 /* UIKit.framework */,
 				B53BE98914DA782000013535 /* Foundation.framework */,
 				B53BE98B14DA782000013535 /* CoreGraphics.framework */,
@@ -150,29 +123,15 @@
 			children = (
 				B5E4AC29188EEB0200AB23DA /* delete_sign.png */,
 				B5E4AC2B188EEB0A00AB23DA /* delete_sign@2x.png */,
+				5B09F541176622360063017E /* Default-568h@2x.png */,
+				5B66431A154787E300E3D6ED /* close.png */,
+				5B66431B154787E300E3D6ED /* close@2x.png */,
+				B53BE9FF14DA97C600013535 /* 37-circle-x.png */,
+				B53BEA0014DA97C600013535 /* 37-circle-x@2x.png */,
 				B53BE98F14DA782000013535 /* AutoCompleteCell-Info.plist */,
 				B53BE99014DA782000013535 /* InfoPlist.strings */,
 				B53BE99314DA782000013535 /* main.m */,
 				B53BE99514DA782000013535 /* AutoCompleteCell-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B53BE9AE14DA782000013535 /* AutoCompleteCellTests */ = {
-			isa = PBXGroup;
-			children = (
-				B53BE9B414DA782000013535 /* AutoCompleteCellTests.h */,
-				B53BE9B514DA782000013535 /* AutoCompleteCellTests.m */,
-				B53BE9AF14DA782000013535 /* Supporting Files */,
-			);
-			path = AutoCompleteCellTests;
-			sourceTree = "<group>";
-		};
-		B53BE9AF14DA782000013535 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B53BE9B014DA782000013535 /* AutoCompleteCellTests-Info.plist */,
-				B53BE9B114DA782000013535 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -210,32 +169,13 @@
 			productReference = B53BE98314DA782000013535 /* AutoCompleteCell.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B53BE9A614DA782000013535 /* AutoCompleteCellTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B53BE9BC14DA782000013535 /* Build configuration list for PBXNativeTarget "AutoCompleteCellTests" */;
-			buildPhases = (
-				B53BE9A214DA782000013535 /* Sources */,
-				B53BE9A314DA782000013535 /* Frameworks */,
-				B53BE9A414DA782000013535 /* Resources */,
-				B53BE9A514DA782000013535 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B53BE9AD14DA782000013535 /* PBXTargetDependency */,
-			);
-			name = AutoCompleteCellTests;
-			productName = AutoCompleteCellTests;
-			productReference = B53BE9A714DA782000013535 /* AutoCompleteCellTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		B53BE97A14DA782000013535 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = B53BE97D14DA782000013535 /* Build configuration list for PBXProject "AutoCompleteCell" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -250,7 +190,6 @@
 			projectRoot = "";
 			targets = (
 				B53BE98214DA782000013535 /* AutoCompleteCell */,
-				B53BE9A614DA782000013535 /* AutoCompleteCellTests */,
 			);
 		};
 /* End PBXProject section */
@@ -274,26 +213,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B53BE9B314DA782000013535 /* InfoPlist.strings in Resources */,
+				B53BEA0114DA97C600013535 /* 37-circle-x.png in Resources */,
+				B53BEA0214DA97C600013535 /* 37-circle-x@2x.png in Resources */,
+				5B66431C154787E300E3D6ED /* close.png in Resources */,
+				5B66431D154787E300E3D6ED /* close@2x.png in Resources */,
+				5B09F542176622360063017E /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B53BE9A514DA782000013535 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B53BE97F14DA782000013535 /* Sources */ = {
@@ -309,23 +237,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53BE9A214DA782000013535 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B53BE9B614DA782000013535 /* AutoCompleteCellTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B53BE9AD14DA782000013535 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B53BE98214DA782000013535 /* AutoCompleteCell */;
-			targetProxy = B53BE9AC14DA782000013535 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B53BE99014DA782000013535 /* InfoPlist.strings */ = {
@@ -352,14 +264,6 @@
 			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
 		};
-		B53BE9B114DA782000013535 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B53BE9B214DA782000013535 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -368,6 +272,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -381,8 +289,9 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -393,14 +302,19 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -415,6 +329,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoCompleteCell/AutoCompleteCell-Prefix.pch";
 				INFOPLIST_FILE = "AutoCompleteCell/AutoCompleteCell-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -427,6 +342,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoCompleteCell/AutoCompleteCell-Prefix.pch";
 				INFOPLIST_FILE = "AutoCompleteCell/AutoCompleteCell-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -485,15 +401,6 @@
 			buildConfigurations = (
 				B53BE9BA14DA782000013535 /* Debug */,
 				B53BE9BB14DA782000013535 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B53BE9BC14DA782000013535 /* Build configuration list for PBXNativeTarget "AutoCompleteCellTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B53BE9BD14DA782000013535 /* Debug */,
-				B53BE9BE14DA782000013535 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

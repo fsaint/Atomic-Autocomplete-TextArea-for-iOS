@@ -32,41 +32,50 @@
 
 @implementation ACAddressBookDataSource
 
-- (void)filterContentForSearchText:(NSString*)searchText {
-	
-	[filtered removeAllObjects]; 	
-    
-	for (int i=0; i<[contacts count]; i++) {
-		
-		ABRecordRef contact =  (__bridge ABRecordRef)([contacts objectAtIndex:i]);
-		
-        NSString *lastName,*firstName;
-        lastName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
-        firstName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
-      //  email      = (NSString *)ABRecordCopyValue(contact, kABPer)
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF contains[cd] %@)", searchText];
-        
-        
-        
-        BOOL resultFN = [predicate evaluateWithObject:firstName];
-        BOOL resultLN = [predicate evaluateWithObject:lastName];
-         
-        
-        
-        
-        if(resultFN || resultLN) {
-            // Add All emails
-            ABMultiValueRef emails = ABRecordCopyValue(contact, kABPersonEmailProperty);
-            int count = ABMultiValueGetCount(emails);
-            for (int email_index = 0;email_index<count;email_index++){
-                ACAddressBookElement *el = [[ACAddressBookElement alloc] init];
-                el.first_name = firstName;
-                el.last_name = lastName ;
-                el.email =  (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emails,email_index);
-                [filtered addObject:el];
+- (void)filterContentForSearchText:(NSString*)searchText withCallback:(void (^)(NSArray *suggestions))update
+{	
+	[filtered removeAllObjects];
+ 	
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+            if (granted) {
+                contacts = (NSMutableArray*)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
+                for (int i=0; i<[contacts count]; i++) {
+                    
+                    ABRecordRef contact =  (__bridge ABRecordRef)([contacts objectAtIndex:i]);
+                    
+                    NSString *lastName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonLastNameProperty));
+                    NSString *firstName  = (NSString *)CFBridgingRelease(ABRecordCopyValue(contact, kABPersonFirstNameProperty));
+                    
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF contains[cd] %@)", searchText];
+                    
+                    
+                    
+                    BOOL resultFN = [predicate evaluateWithObject:firstName];
+                    BOOL resultLN = [predicate evaluateWithObject:lastName];
+                    
+                    
+                    
+                    
+                    if(resultFN || resultLN) {
+                        // Add All emails
+                        ABMultiValueRef emails = ABRecordCopyValue(contact, kABPersonEmailProperty);
+                        int count = ABMultiValueGetCount(emails);
+                        for (int email_index = 0; email_index < count; email_index++){
+                            ACAddressBookElement *el = [[ACAddressBookElement alloc] init];
+                            el.first_name = firstName;
+                            el.last_name = lastName ;
+                            el.email =  CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails,email_index));
+                            [filtered addObject:el];
+                        }
+                        if (emails) CFRelease(emails);
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (update) update(filtered);
+                });
             }
-        }	
-    }
+    });
 }
 
 
@@ -74,20 +83,10 @@
 -(id)init{
     self = [super init];
     if (self){
-        contacts = [[NSMutableArray alloc] init];
         filtered = [[NSMutableArray alloc] init];
         
-        ABAddressBookRef addressBook = ABAddressBookCreate();
-      // contacts = (NSMutableArray*)ABAddressBookCopyArrayOfAllPeople(addressBook);
-        
-
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef err){
-            if (granted)
-                contacts = (NSMutableArray*)CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
-            //CFRelease(addressBook);
-        });
        // [contacts sortUsingFunction:(int(*)(id, id, void*))ABPersonComparePeopleByName context:(void*)ABPersonGetSortOrdering()];
-
+        //CFRelease(addressBook);
     }
     return self;
 }
@@ -96,8 +95,7 @@
 
 }
 -(void)getSuggestionsFor:(NSString *)searchString withCallback:(void (^)(NSArray *suggestions))update{
-    [self filterContentForSearchText:searchString];
-    update(filtered);
+    [self filterContentForSearchText:searchString withCallback:update];
     
 }
 

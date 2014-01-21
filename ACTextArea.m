@@ -29,6 +29,7 @@
     text = [[UITextView alloc] initWithFrame:CGRectZero];
     text.autocorrectionType = UITextAutocorrectionTypeNo;
     text.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    text.returnKeyType = UIReturnKeyDone;
     [self addSubview:text];
     text.delegate = self;
     self.font = [UIFont systemFontOfSize:18.0];
@@ -249,8 +250,8 @@
        
         self.filtered_autocomp = arr;
         [autocomplete reloadData];
-        if ([arr count]>0)
-             [self showAutotable];
+        if ([arr count] > 0 && [text.text length] >= 2)
+            [self showAutotable];
         else
             [self hideAutoTable];
     }];
@@ -267,7 +268,9 @@
 #pragma mark -
 #pragma mark UITextViewDelegate methods
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)intex{
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)intex
+{
+    [autoCompleteDataSource cancel];
     ACBubble *last = [bubbles lastObject];
     if ([textView.text length] == 0 && [intex length] ==0){
         
@@ -285,10 +288,21 @@
         return NO;
     }
     last.selected = NO;
-    if ([textView.text length] >=2){
-        [self fireAutoComplete:textView.text];
-    }else{
-        [self hideAutoTable];
+    
+    if ([intex length] == 0) { //estoy borrando y debo autocompletar por la string menos el ultimo caracter
+        NSString *autoCompleteString = [textView.text substringToIndex:[textView.text length] - 1];
+        if ([autoCompleteString length] >= 2) {
+            [self fireAutoComplete:autoCompleteString];
+        } else {
+            [self hideAutoTable];
+        }
+    } else { //debo autocompletar por la string nueva
+        NSString *autoCompleteString = [NSString stringWithFormat:@"%@%@", textView.text, intex];
+        if ([autoCompleteString length] >= 2) {
+            [self fireAutoComplete:autoCompleteString];
+        } else {
+            [self hideAutoTable];
+        }
     }
     return YES;
 }
@@ -313,14 +327,18 @@
         cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cell_name];
     }
     
-    cell.textLabel.text = [self nameForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
-    cell.detailTextLabel.text = [self emailForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
+    if (indexPath.row < [filtered_autocomp count]) {
+        cell.textLabel.text = [self nameForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
+        cell.detailTextLabel.text = [self emailForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    id object = [filtered_autocomp objectAtIndex:indexPath.row];
-    [self checkInItem:object];
+    if (indexPath.row < [filtered_autocomp count]) {
+        id object = [filtered_autocomp objectAtIndex:indexPath.row];
+        [self checkInItem:object];
+    }
     [self hideAutoTable];
 }
 

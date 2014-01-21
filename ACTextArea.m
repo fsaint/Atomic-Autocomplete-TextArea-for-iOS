@@ -19,13 +19,9 @@
 @end
 
 @implementation ACTextArea
-@synthesize font;
-@synthesize autoCompleteDataSource;
-@synthesize filtered_autocomp;
-
 -(void)initialize{
-    bubbles = [[NSMutableArray alloc] init];
-    items = [[NSMutableArray alloc] init];
+    self.bubbles = [[NSMutableArray alloc] init];
+    self.items = [[NSMutableArray alloc] init];
     text = [[UITextView alloc] initWithFrame:CGRectZero];
     text.autocorrectionType = UITextAutocorrectionTypeNo;
     text.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -133,10 +129,10 @@
 }
 
 -(void)addItem:(id<ACAutoCompleteElement>)it{
-    [items addObject:it];
+    [_items addObject:it];
     ACBubble *b = [[ACBubble alloc] initWithFrame:CGRectZero];
     b.textarea = self;
-    [b setFont:font];
+    [b setFont:_font];
     
     NSRange emailRange = [[self nameForItem:it] rangeOfString:@"<"];
     if (emailRange.location == NSNotFound) {
@@ -146,7 +142,7 @@
         [b setLabelText:[[self nameForItem:it] substringToIndex:emailRange.location]];
     }
     
-    [bubbles addObject:b];
+    [_bubbles addObject:b];
     [self addSubview:b];
 
 }
@@ -167,7 +163,7 @@
     // delta to keyboard
     
     
-    CGRect fr = CGRectMake(tfr.origin.x, tfr.origin.y +tfr.size.height  , tfr.size.width, [filtered_autocomp count] * AC_CELL_HEIGHT);
+    CGRect fr = CGRectMake(tfr.origin.x, tfr.origin.y +tfr.size.height  , tfr.size.width, [_filtered_autocomp count] * AC_CELL_HEIGHT);
     
     UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
     
@@ -193,17 +189,17 @@
 }
 
 -(void)deleteItem:(int)index{
-    if (index >=[bubbles count])
+    if (index >=[_bubbles count])
         return;
-    [items removeObjectAtIndex:index];
-    ACBubble *b = [bubbles objectAtIndex:index];
-    [bubbles removeObjectAtIndex:index];
+    [_items removeObjectAtIndex:index];
+    ACBubble *b = [_bubbles objectAtIndex:index];
+    [_bubbles removeObjectAtIndex:index];
     [b removeFromSuperview];
     [self setNeedsLayout];
 }
 
 -(void)deleteItemWithBubble:(ACBubble *)bb{
-    int index = [bubbles indexOfObject:bb];
+    int index = [_bubbles indexOfObject:bb];
     [self deleteItem:index];
 }
 
@@ -211,12 +207,12 @@
 -(void)layoutSubviews{
     int row = 0;
     CGFloat x_advance=AC_SPACING/2.0;
-    for (int i=0;i<[items count];i++){
+    for (int i=0;i<[_items count];i++){
         
-        NSString *it = [self nameForItem:[items objectAtIndex:i]];
+        NSString *it = [self nameForItem:[_items objectAtIndex:i]];
         
         
-        ACBubble *b = [bubbles objectAtIndex:i];
+        ACBubble *b = [_bubbles objectAtIndex:i];
         
         CGSize z =[it sizeWithFont:self.font constrainedToSize:CGSizeMake(300.0, AC_TEXT_HEIGHT)];
         CGFloat w = z.width + AC_TEXT_HEIGHT  /* <- this is space for the button that is a square AC_TEXT_HEIGHT x AC_TEXT_HEIGHT*/ + 18.0 /* <- for the inner padding*/;
@@ -256,7 +252,7 @@
     [self setNeedsLayout];
 }
 -(void)fireAutoComplete:(NSString *)search{
-    [autoCompleteDataSource getSuggestionsFor:search withCallback:^(NSArray *arr){
+    [_autoCompleteDataSource getSuggestionsFor:search withCallback:^(NSArray *arr){
        
         self.filtered_autocomp = arr;
         [autocomplete reloadData];
@@ -272,7 +268,7 @@
 }
 
 -(NSArray *)getSelectedItems{
-    return items;
+    return _items;
 }
 
 #pragma mark -
@@ -280,12 +276,12 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)intex
 {
-    [autoCompleteDataSource cancel];
-    ACBubble *last = [bubbles lastObject];
+    [_autoCompleteDataSource cancel];
+    ACBubble *last = [_bubbles lastObject];
     if ([textView.text length] == 0 && [intex length] ==0){
         
         if (last.selected){
-            [self deleteItem:[bubbles count]-1];
+            [self deleteItem:[_bubbles count]-1];
         }else{
             last.selected = YES;
         }
@@ -324,7 +320,7 @@
 #pragma mark Autocompletion methods
 
 -(int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [filtered_autocomp count];
+    return [_filtered_autocomp count];
 }
 -(int)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -337,16 +333,16 @@
         cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cell_name];
     }
     
-    if (indexPath.row < [filtered_autocomp count]) {
-        cell.textLabel.text = [self nameForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
-        cell.detailTextLabel.text = [self emailForItem:[filtered_autocomp objectAtIndex:indexPath.row]];
+    if (indexPath.row < [_filtered_autocomp count]) {
+        cell.textLabel.text = [self nameForItem:[_filtered_autocomp objectAtIndex:indexPath.row]];
+        cell.detailTextLabel.text = [self emailForItem:[_filtered_autocomp objectAtIndex:indexPath.row]];
     }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row < [filtered_autocomp count]) {
-        id object = [filtered_autocomp objectAtIndex:indexPath.row];
+    if (indexPath.row < [_filtered_autocomp count]) {
+        id object = [_filtered_autocomp objectAtIndex:indexPath.row];
         [self checkInItem:object];
     }
     [self hideAutoTable];

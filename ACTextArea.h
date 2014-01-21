@@ -24,19 +24,16 @@
 @interface ACTextArea : UIView <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>{
     
     // this two should be the same length
-    NSMutableArray *items;
-    NSMutableArray *bubbles;
-
     // This is fot the input
     UITextView *text;
-    UIFont *font;
     UITableView *autocomplete;
-    NSArray *filtered_autocomp;
     
-    id<ACAutoCompleteDataSource> autoCompleteDataSource;
     
     CGRect keyboardFrame;
 }
+
+@property (nonatomic,strong) NSMutableArray *items;
+@property (nonatomic,strong) NSMutableArray *bubbles;
 
 @property (nonatomic, readwrite, strong) NSArray *filtered_autocomp;
 @property (nonatomic, readwrite, strong) id<ACAutoCompleteDataSource> autoCompleteDataSource;

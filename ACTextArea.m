@@ -55,9 +55,7 @@
 }
 
 
--(void)setPlaceholder:(NSString *)placeholder{
-    
-}
+
 -(void)didTap:(UITapGestureRecognizer *)rec{
     [text becomeFirstResponder];
 }

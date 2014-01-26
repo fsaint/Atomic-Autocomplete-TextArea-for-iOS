@@ -45,9 +45,22 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     //keyboardFrame
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
+    tap.numberOfTapsRequired = 1;
+   // [self addGestureRecognizer:tap];
+
     self.userInteractionEnabled = YES;
+    
+    
 }
 
+
+-(void)setPlaceholder:(NSString *)placeholder{
+    
+}
+-(void)didTap:(UITapGestureRecognizer *)rec{
+    [text becomeFirstResponder];
+}
 - (void) keyboardDidHide:(NSNotification*)notification {
     keyboardFrame = CGRectZero;
  //   [self setNeedsLayout];
@@ -238,6 +251,7 @@
     [text becomeFirstResponder];
 }
 
+
 -(void)checkInItem{
     
     if ([text.text length]==0)
@@ -274,6 +288,25 @@
 #pragma mark -
 #pragma mark UITextViewDelegate methods
 
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@"placeholder text here..."]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor]; //optional
+    }
+    [textView becomeFirstResponder];
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    [self checkInItem];
+    [self hideAutoTable];
+    
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = self.placeholder;
+        textView.textColor = [UIColor lightGrayColor]; //optional
+    }
+    [textView resignFirstResponder];
+}
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)intex
 {
     [_autoCompleteDataSource cancel];
@@ -348,7 +381,4 @@
     [self hideAutoTable];
 }
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    [text becomeFirstResponder];
-}
 @end

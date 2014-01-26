@@ -34,7 +34,7 @@
 
 @property (nonatomic,strong) NSMutableArray *items;
 @property (nonatomic,strong) NSMutableArray *bubbles;
-
+@property (nonatomic,strong) NSString *placeholder;
 @property (nonatomic, readwrite, strong) NSArray *filtered_autocomp;
 @property (nonatomic, readwrite, strong) id<ACAutoCompleteDataSource> autoCompleteDataSource;
 @property (nonatomic, readwrite, strong) UIFont *font;
@@ -43,5 +43,7 @@
 -(NSArray *)getSelectedItems;
 -(void)checkInItem;
 -(void)hideAutoTable;
+
+
 
 @end

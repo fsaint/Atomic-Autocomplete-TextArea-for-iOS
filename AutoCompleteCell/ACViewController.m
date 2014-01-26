@@ -27,6 +27,8 @@
     [textArea loadItems:[NSArray arrayWithObjects:@"Felipe Saint-Jean",@"Test User",@"Jack", nil]];
     
     ACArrayDataSource *arr = [[ACArrayDataSource alloc] initWithObjects:@[@{@"name":@"Felipe Saint-Jean"},@{@"name":@"Domino"}] displayKey:@"name"];
+    textArea.placeholder = @"Placeholder ...";
+    
     textArea.autoCompleteDataSource = arr;
     
     //[[ACAddressBookDataSource alloc] init];

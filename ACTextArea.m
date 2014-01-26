@@ -54,6 +54,11 @@
     
 }
 
+-(void)setPlaceholder:(NSString *)placeholder{
+
+    _placeholder = placeholder;
+    [self activatePlacehlder:text];
+}
 
 
 -(void)didTap:(UITapGestureRecognizer *)rec{
@@ -295,14 +300,18 @@
     [textView becomeFirstResponder];
 }
 
--(void)textViewDidEndEditing:(UITextView *)textView{
-    [self checkInItem];
-    [self hideAutoTable];
-    
+- (void)activatePlacehlder:(UITextView *)textView {
     if ([textView.text isEqualToString:@""]) {
         textView.text = self.placeholder;
         textView.textColor = [UIColor lightGrayColor]; //optional
     }
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    [self checkInItem];
+    [self hideAutoTable];
+    
+    [self activatePlacehlder:textView];
     [textView resignFirstResponder];
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)intex

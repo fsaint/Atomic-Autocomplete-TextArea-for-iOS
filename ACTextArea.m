@@ -47,7 +47,7 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     tap.numberOfTapsRequired = 1;
-   // [self addGestureRecognizer:tap];
+    [self addGestureRecognizer:tap];
 
     self.userInteractionEnabled = YES;
     
@@ -248,7 +248,7 @@
     }
     CGFloat l_width = self.bounds.size.width - x_advance;
     text.frame = CGRectMake(x_advance, AC_SPACING / 2.0 + row * (AC_TEXT_HEIGHT + AC_SPACING)  ,l_width, AC_TEXT_HEIGHT);
-    [text becomeFirstResponder];
+    //[text becomeFirstResponder];
 }
 
 

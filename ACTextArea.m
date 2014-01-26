@@ -293,7 +293,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@"placeholder text here..."]) {
+    if ([textView.text isEqualToString:self.placeholder]) {
         textView.text = @"";
         textView.textColor = [UIColor blackColor]; //optional
     }

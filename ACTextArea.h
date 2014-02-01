@@ -38,12 +38,12 @@
 @property (nonatomic, readwrite, strong) NSArray *filtered_autocomp;
 @property (nonatomic, readwrite, strong) id<ACAutoCompleteDataSource> autoCompleteDataSource;
 @property (nonatomic, readwrite, strong) UIFont *font;
+@property (nonatomic,assign) BOOL allow_new_element;
+
 -(void)loadItems:(NSArray *)newItems;
 -(void)deleteItemWithBubble:(ACBubble *)bb;
 -(NSArray *)getSelectedItems;
 -(void)checkInItem;
 -(void)hideAutoTable;
-
-
 
 @end

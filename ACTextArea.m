@@ -50,6 +50,7 @@
     [self addGestureRecognizer:tap];
 
     self.userInteractionEnabled = YES;
+    self.allow_new_element = YES;
     
     
 }
@@ -259,7 +260,10 @@
     
     if ([text.text length]==0)
         return;
-    [self addItem:(id<ACAutoCompleteElement>)text.text];
+    
+    
+    if (self.allow_new_element)
+        [self addItem:(id<ACAutoCompleteElement>)text.text];
     text.text = @"";
     [self setNeedsLayout];
 }

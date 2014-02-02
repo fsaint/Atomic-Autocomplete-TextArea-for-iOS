@@ -32,6 +32,7 @@
     CGRect keyboardFrame;
 }
 
+@property (nonatomic, copy) void (^finishedEditing)(ACTextArea *);
 @property (nonatomic,strong) NSMutableArray *items;
 @property (nonatomic,strong) NSMutableArray *bubbles;
 @property (nonatomic,strong) NSString *placeholder;

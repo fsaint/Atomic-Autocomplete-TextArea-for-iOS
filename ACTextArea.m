@@ -317,6 +317,10 @@
     
     [self activatePlacehlder:textView];
     [textView resignFirstResponder];
+    
+    if (self.finishedEditing)
+        self.finishedEditing(self);
+    
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)intex
 {
@@ -390,6 +394,10 @@
         [self checkInItem:object];
     }
     [self hideAutoTable];
+}
+
+-(BOOL )becomeFirstResponder{
+    return [text becomeFirstResponder];
 }
 
 @end

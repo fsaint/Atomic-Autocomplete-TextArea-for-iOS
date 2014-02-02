@@ -335,6 +335,10 @@
         }
         [self hideAutoTable];
         return NO;
+    }else if ([intex isEqualToString:@"\n"] && !self.allow_new_element){
+        if (self.finishedEditing)
+            self.finishedEditing(self);
+
     }else if ([intex isEqualToString:@","] || [intex isEqualToString:@"\n"]){
         [self checkInItem];
         [self hideAutoTable];

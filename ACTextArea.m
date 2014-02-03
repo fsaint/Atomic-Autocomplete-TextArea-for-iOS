@@ -108,12 +108,7 @@
             fullUserInfo = [el getDisplayText];
         else
             fullUserInfo = [el description];
-        NSRange emailRange = [fullUserInfo rangeOfString:@"<"];
-
-        if (emailRange.location == NSNotFound) 
-            return fullUserInfo;        
-        else 
-            return [fullUserInfo substringToIndex:emailRange.location];
+        return fullUserInfo;
     }
 }
 
@@ -125,6 +120,9 @@
     else
     {
         id<ACAutoCompleteElement>el = (id<ACAutoCompleteElement>)item;        
+        
+        if ([el respondsToSelector:@selector(getDetailText)])
+            return [el getDetailText];
         
         NSString *fullUserInfo;
         if ([el respondsToSelector:@selector(getDisplayText)])
@@ -389,6 +387,8 @@
         cell.textLabel.text = [self nameForItem:[_filtered_autocomp objectAtIndex:indexPath.row]];
         cell.detailTextLabel.text = [self emailForItem:[_filtered_autocomp objectAtIndex:indexPath.row]];
     }
+    
+    
     return cell;
 }
 

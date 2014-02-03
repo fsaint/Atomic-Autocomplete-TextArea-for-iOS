@@ -11,6 +11,8 @@
 
 @protocol ACAutoCompleteElement <NSObject>
 -(NSString *)getDisplayText;
+@optional
+-(NSString *)getDetailText;
 @end
 
 @protocol ACAutoCompleteDataSource <NSObject>

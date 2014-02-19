@@ -51,7 +51,7 @@
 
     self.userInteractionEnabled = YES;
     self.allow_new_element = YES;
-    
+    self.number_of_keys_needed = 2;
     
 }
 
@@ -347,7 +347,7 @@
     
     if ([intex length] == 0) { //estoy borrando y debo autocompletar por la string menos el ultimo caracter
         NSString *autoCompleteString = [textView.text substringToIndex:[textView.text length] - 1];
-        if ([autoCompleteString length] >= 2) {
+        if ([autoCompleteString length] >= self.number_of_keys_needed) {
             [self fireAutoComplete:autoCompleteString];
         } else {
             [self hideAutoTable];

@@ -42,7 +42,7 @@
 @property (nonatomic, readwrite, strong) id<ACAutoCompleteDataSource> autoCompleteDataSource;
 @property (nonatomic, readwrite, strong) UIFont *font;
 @property (nonatomic,assign) BOOL allow_new_element;
-
+@property (nonatomic,assign) int number_of_keys_needed;
 -(void)loadItems:(NSArray *)newItems;
 -(void)deleteItemWithBubble:(ACBubble *)bb;
 -(NSArray *)getSelectedItems;

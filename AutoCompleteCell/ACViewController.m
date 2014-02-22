@@ -30,7 +30,7 @@
     textArea.placeholder = @"Placeholder ...";
     
     textArea.autoCompleteDataSource = arr;
-    
+    textArea.short_list = @[@"A",@"B",@"C"];
     //[[ACAddressBookDataSource alloc] init];
 }
 

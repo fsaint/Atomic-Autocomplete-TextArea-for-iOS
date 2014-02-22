@@ -14,6 +14,7 @@
 
 @interface ACTextArea ()
 
+@property (nonatomic,assign) BOOL short_list_mode_on;
 -(void)hideAutoTable;
 
 @end
@@ -76,6 +77,8 @@
     UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
     UIView *mainSubviewOfWindow = window.rootViewController.view;
     keyboardFrame = [mainSubviewOfWindow convertRect:keyboardFrameOrig fromView:window];
+    
+    [self resizeTable];
     [self setNeedsLayout];
 }
 
@@ -172,13 +175,17 @@
     }
     [self hideAutoTable];
 }
--(void)showAutotable{
+
+-(void)resizeTable{
     CGRect tfr = text.frame;
     // right below the textx
     // delta to keyboard
     
-    
-    CGRect fr = CGRectMake(tfr.origin.x, tfr.origin.y +tfr.size.height  , tfr.size.width, [_filtered_autocomp count] * AC_CELL_HEIGHT);
+    CGRect fr = CGRectZero;
+    if (self.short_list_mode_on)
+        fr = CGRectMake(tfr.origin.x, tfr.origin.y +tfr.size.height  , tfr.size.width, [_short_list count] * AC_CELL_HEIGHT);
+    else
+        fr = CGRectMake(tfr.origin.x, tfr.origin.y +tfr.size.height  , tfr.size.width, [_filtered_autocomp count] * AC_CELL_HEIGHT);
     
     UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
     
@@ -191,11 +198,22 @@
         //fr.size.height = MIN(fr.size.height,  - window_fr.origin.y);
     }
     autocomplete.frame =   [mainSubviewOfWindow convertRect:fr fromView:self];
+
+}
+
+-(void)showAutotable{
+    [self resizeTable];
     autocomplete.hidden = NO;
     
+    UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
+    UIView *mainSubviewOfWindow = [[window subviews] lastObject];
     [mainSubviewOfWindow addSubview:autocomplete];
-    [autocomplete scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    
+    //if (self.short_list_mode_on && [self.short_list count])
     [autocomplete reloadData];
+    
+    [autocomplete scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    
 }
 
 -(void)hideAutoTable{
@@ -251,6 +269,8 @@
     CGFloat l_width = self.bounds.size.width - x_advance;
     text.frame = CGRectMake(x_advance, AC_SPACING / 2.0 + row * (AC_TEXT_HEIGHT + AC_SPACING)  ,l_width, AC_TEXT_HEIGHT);
     //[text becomeFirstResponder];
+    
+    [self resizeTable];
 }
 
 
@@ -266,6 +286,7 @@
     [self setNeedsLayout];
 }
 -(void)checkInItem:(id)obj{
+    
     [self addItem:obj];
     text.text = @"";
     [self setNeedsLayout];
@@ -299,6 +320,11 @@
         textView.text = @"";
         textView.textColor = [UIColor blackColor]; //optional
     }
+    
+    if (self.short_list){
+        self.short_list_mode_on = YES;
+        [self showAutotable];
+    }
     [textView becomeFirstResponder];
 }
 
@@ -331,7 +357,13 @@
         }else{
             last.selected = YES;
         }
-        [self hideAutoTable];
+        
+        if (self.short_list){
+            self.short_list_mode_on = YES;
+            [self showAutotable];
+        }else
+            [self hideAutoTable];
+        
         return NO;
     }else if ([intex isEqualToString:@"\n"] && !self.allow_new_element){
         if (self.finishedEditing)
@@ -339,7 +371,11 @@
 
     }else if ([intex isEqualToString:@","] || [intex isEqualToString:@"\n"]){
         [self checkInItem];
-        [self hideAutoTable];
+        if (self.short_list){
+            self.short_list_mode_on = YES;
+            [self showAutotable];
+        }else
+            [self hideAutoTable];
         last.selected = NO;
         return NO;
     }
@@ -348,14 +384,22 @@
     if ([intex length] == 0) { //estoy borrando y debo autocompletar por la string menos el ultimo caracter
         NSString *autoCompleteString = [textView.text substringToIndex:[textView.text length] - 1];
         if ([autoCompleteString length] >= self.number_of_keys_needed) {
+            self.short_list_mode_on = NO;
             [self fireAutoComplete:autoCompleteString];
-        } else {
+            
+        } else if (self.short_list){
+            self.short_list_mode_on = YES;
+            [self showAutotable];
+        }else {
             [self hideAutoTable];
         }
     } else { //debo autocompletar por la string nueva
         NSString *autoCompleteString = [NSString stringWithFormat:@"%@%@", textView.text, intex];
-        if ([autoCompleteString length] >= 2) {
+        if ([autoCompleteString length] >= self.number_of_keys_needed) {
+            self.short_list_mode_on = NO;
             [self fireAutoComplete:autoCompleteString];
+        } else if (self.short_list_mode_on){
+            [self showAutotable];
         } else {
             [self hideAutoTable];
         }
@@ -370,7 +414,10 @@
 #pragma mark Autocompletion methods
 
 -(int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_filtered_autocomp count];
+    if (_short_list_mode_on)
+        return [_short_list count];
+    else
+        return [_filtered_autocomp count];
 }
 -(int)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -383,7 +430,12 @@
         cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cell_name];
     }
     
-    if (indexPath.row < [_filtered_autocomp count]) {
+    
+    if (_short_list_mode_on){
+        cell.textLabel.text = [self nameForItem:[_short_list objectAtIndex:indexPath.row]];
+        cell.detailTextLabel.text = [self emailForItem:[_short_list objectAtIndex:indexPath.row]];
+
+    }else if (indexPath.row < [_filtered_autocomp count]) {
         cell.textLabel.text = [self nameForItem:[_filtered_autocomp objectAtIndex:indexPath.row]];
         cell.detailTextLabel.text = [self emailForItem:[_filtered_autocomp objectAtIndex:indexPath.row]];
     }
@@ -393,11 +445,23 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row < [_filtered_autocomp count]) {
+    if (_short_list_mode_on){
+        id object = [_short_list objectAtIndex:indexPath.row];
+        [self checkInItem:object];
+        [self showAutotable];
+
+    
+    }else if (indexPath.row < [_filtered_autocomp count]) {
         id object = [_filtered_autocomp objectAtIndex:indexPath.row];
         [self checkInItem:object];
+        
+        if (self.short_list){
+            self.short_list_mode_on = YES;
+            [self showAutotable];
+        }else
+            [self hideAutoTable];
     }
-    [self hideAutoTable];
+    
 }
 
 -(BOOL )becomeFirstResponder{

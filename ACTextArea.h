@@ -23,7 +23,7 @@
 @end
 
 
-@interface ACTextArea : UIView <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>{
+@interface ACTextArea : UIScrollView <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>{
     
     // this two should be the same length
     // This is fot the input

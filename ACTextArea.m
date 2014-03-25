@@ -54,6 +54,9 @@
     self.allow_new_element = YES;
     self.number_of_keys_needed = 2;
     
+    self.contentSize = self.frame.size;
+    self.clipsToBounds = YES;
+    
 }
 
 -(void)setPlaceholder:(NSString *)placeholder{
@@ -80,6 +83,7 @@
     
     [self resizeTable];
     [self setNeedsLayout];
+    [self adjustScroll];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
@@ -229,6 +233,7 @@
     [_bubbles removeObjectAtIndex:index];
     [b removeFromSuperview];
     [self setNeedsLayout];
+    [self adjustScroll];
 }
 
 -(void)deleteItemWithBubble:(ACBubble *)bb{
@@ -237,6 +242,20 @@
 }
 
 
+-(void)adjustScroll{
+    if (self.contentSize.height > self.bounds.size.height){
+        CGPoint bottomOffset = CGPointMake(0, self.contentSize.height - self.bounds.size.height);
+        [self setContentOffset:bottomOffset animated:YES];
+        NSLog(@",to %f",bottomOffset.y);
+    }else{
+        [self setContentOffset:CGPointMake(0.0, 0.0)];
+        
+        NSLog(@"Adjust SCroll to Zero");
+    }
+    
+    
+
+}
 -(void)layoutSubviews{
     int row = 0;
     CGFloat x_advance=AC_SPACING/2.0;
@@ -270,9 +289,17 @@
     text.frame = CGRectMake(x_advance, AC_SPACING / 2.0 + row * (AC_TEXT_HEIGHT + AC_SPACING)  ,l_width, AC_TEXT_HEIGHT);
     //[text becomeFirstResponder];
     
+    NSLog(@"Set Text Frame");
+    
     [self resizeTable];
-}
+    
+    
 
+    self.contentSize = CGSizeMake(self.bounds.size.width, AC_SPACING / 2.0 + row * (AC_TEXT_HEIGHT + AC_SPACING) + AC_TEXT_HEIGHT);
+    
+    
+    
+}
 
 -(void)checkInItem{
     
@@ -283,13 +310,16 @@
     if (self.allow_new_element)
         [self addItem:(id<ACAutoCompleteElement>)text.text];
     text.text = @"";
-    [self setNeedsLayout];
+    [self layoutSubviews];
+    [self adjustScroll];
 }
+
 -(void)checkInItem:(id)obj{
     
     [self addItem:obj];
     text.text = @"";
-    [self setNeedsLayout];
+    [self layoutSubviews];
+    [self adjustScroll];
 }
 -(void)fireAutoComplete:(NSString *)search{
     [_autoCompleteDataSource getSuggestionsFor:search withCallback:^(NSArray *arr){

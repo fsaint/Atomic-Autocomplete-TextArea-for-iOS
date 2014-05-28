@@ -250,7 +250,7 @@
     }else{
         [self setContentOffset:CGPointMake(0.0, 0.0)];
         
-        NSLog(@"Adjust SCroll to Zero");
+        //NSLog(@"Adjust SCroll to Zero");
     }
     
     
@@ -289,7 +289,7 @@
     text.frame = CGRectMake(x_advance, AC_SPACING / 2.0 + row * (AC_TEXT_HEIGHT + AC_SPACING)  ,l_width, AC_TEXT_HEIGHT);
     //[text becomeFirstResponder];
     
-    NSLog(@"Set Text Frame");
+    //NSLog(@"Set Text Frame");
     
     [self resizeTable];
     

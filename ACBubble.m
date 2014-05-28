@@ -36,7 +36,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         // text label
         text_label = [[UILabel alloc] initWithFrame:CGRectZero];
         text_label.backgroundColor = [UIColor clearColor];
-        text_label.textColor = [UIColor blueColor];
+        text_label.textColor = [UIColor colorWithRed:0.041 green:0.375 blue:0.998 alpha:1.000];
         text_label.textAlignment = NSTextAlignmentRight;
         text_label.font = [UIFont boldSystemFontOfSize:12.0];
         text_label.textAlignment = NSTextAlignmentRight;
@@ -68,7 +68,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         
     }
     else{
-        text_label.textColor = [UIColor blueColor];
+        text_label.textColor = [UIColor colorWithRed:0.041 green:0.375 blue:0.998 alpha:1.000];
         delete_button.hidden = YES;
     }
     text_label.backgroundColor = self.backgroundColor;
@@ -105,16 +105,16 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     
     //UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:radius];
     
-    NSLog(@"%@",NSStringFromCGRect(CGRectInset(self.bounds, 1.0, 1.0)));
+    //NSLog(@"%@",NSStringFromCGRect(CGRectInset(self.bounds, 1.0, 1.0)));
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds, 1.0, 1.0) cornerRadius:radius];
     [path setLineWidth:1.0];
     if (self.selected){
-        [[UIColor blueColor] setFill];
+        [[UIColor colorWithRed:0.041 green:0.375 blue:0.998 alpha:1.000] setFill];
 
         [path fill];
     }else{
-        [[UIColor blueColor]  setStroke];
+        [[UIColor colorWithRed:0.041 green:0.375 blue:0.998 alpha:1.000]  setStroke];
 
         [path stroke];
     }

@@ -369,7 +369,10 @@
     [self checkInItem];
     [self hideAutoTable];
     
-    [self activatePlacehlder:textView];
+    if ([self getSelectedItems] <= 0) {
+        [self activatePlacehlder:textView];
+    }
+    
     [textView resignFirstResponder];
     
     if (self.finishedEditing)

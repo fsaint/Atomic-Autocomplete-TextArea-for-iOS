@@ -266,7 +266,9 @@
         
         ACBubble *b = [_bubbles objectAtIndex:i];
         
-        CGSize z =[it sizeWithFont:self.font constrainedToSize:CGSizeMake(300.0, AC_TEXT_HEIGHT)];
+        CGRect textRect = [it boundingRectWithSize:CGSizeMake(300.0, AC_TEXT_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.font} context:nil];
+        CGSize z = textRect.size;
+        
         CGFloat w = z.width + AC_TEXT_HEIGHT  /* <- this is space for the button that is a square AC_TEXT_HEIGHT x AC_TEXT_HEIGHT*/ + 18.0 /* <- for the inner padding*/;
         w  = ceilf(w);
         CGFloat x_loc = x_advance + AC_SPACING;

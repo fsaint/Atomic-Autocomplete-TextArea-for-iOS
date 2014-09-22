@@ -9,22 +9,20 @@
 #import "ACViewController.h"
 #import "ACAddressBookDataSource.h"
 #import "ACArrayDataSource.h"
-@implementation ACViewController
 
-#pragma mark - View lifecycle
+@implementation ACViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    [self.textArea loadItems:[NSArray arrayWithObjects:@"Felipe Saint-Jean",@"Test User",@"Jack", nil]];
+    
+    [self.textArea loadItems:@[@"Felipe Saint-Jean",@"Test User",@"Jack"]];
     
     ACArrayDataSource *arr = [[ACArrayDataSource alloc] initWithObjects:@[@{@"name":@"Felipe Saint-Jean"},@{@"name":@"Domino"}] displayKey:@"name"];
     self.textArea.placeholder = @"Placeholder ...";
     
     self.textArea.autoCompleteDataSource = arr;
     self.textArea.short_list = @[@"A",@"B",@"C"];
-    //[[ACAddressBookDataSource alloc] init];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

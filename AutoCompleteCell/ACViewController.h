@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ACTextArea.h"
-@interface ACViewController : UIViewController{
-    ACTextArea *textArea;
-}
 
-@property (nonatomic, readwrite, strong) IBOutlet ACTextArea *textArea;
+@interface ACViewController : UIViewController
+
+@property (nonatomic, weak) IBOutlet ACTextArea *textArea;
+
 @end

@@ -22,7 +22,7 @@
     self.textArea.placeholder = @"Placeholder ...";
     
     self.textArea.autoCompleteDataSource = arr;
-    self.textArea.short_list = @[@"A",@"B",@"C"];
+    self.textArea.short_list = @[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"Ñ",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

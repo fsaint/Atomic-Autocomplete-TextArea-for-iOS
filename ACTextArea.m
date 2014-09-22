@@ -196,10 +196,11 @@
     UIView *mainSubviewOfWindow = [[window subviews] lastObject];
     CGRect window_fr = [mainSubviewOfWindow convertRect:fr fromView:self];
     
-    if (self.keyboardFrame.origin.y != 0.0)
+    if (self.keyboardFrame.origin.y != 0.0) {
         fr.size.height = MIN(fr.size.height,self.keyboardFrame.origin.y - window_fr.origin.y);
-    else{
-        //fr.size.height = MIN(fr.size.height,  - window_fr.origin.y);
+    }
+    else if (self.keyboardFrame.origin.x != 0.0) {
+        fr.size.height = MIN(fr.size.height, self.keyboardFrame.size.width - (window_fr.origin.x + window_fr.size.width));
     }
     self.autocomplete.frame =   [mainSubviewOfWindow convertRect:fr fromView:self];
 

@@ -23,25 +23,25 @@
 -(void)initialize{
     self.bubbles = [[NSMutableArray alloc] init];
     self.items = [[NSMutableArray alloc] init];
-    text = [[UITextView alloc] initWithFrame:CGRectZero];
-    text.autocorrectionType = UITextAutocorrectionTypeNo;
-    text.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    text.returnKeyType = UIReturnKeyDone;
-    [self addSubview:text];
-    text.delegate = self;
+    self.text = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.text.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.text.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.text.returnKeyType = UIReturnKeyDone;
+    [self addSubview:self.text];
+    self.text.delegate = self;
     self.font = [UIFont systemFontOfSize:18.0];
-    text.font = self.font;
+    self.text.font = self.font;
     //text.contentInset = UIEdgeInsetsMake(1.0, 1.0, 12.0, 0.0);
-    [text  setTextContainerInset:UIEdgeInsetsMake(4, 1, 0.0, 0)];
+    [self.text  setTextContainerInset:UIEdgeInsetsMake(4, 1, 0.0, 0)];
     
       
-    autocomplete = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    autocomplete.delegate = self;
-    autocomplete.rowHeight = AC_CELL_HEIGHT;
-    autocomplete.dataSource = self;
-    autocomplete.hidden = YES;
+    self.autocomplete = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.autocomplete.delegate = self;
+    self.autocomplete.rowHeight = AC_CELL_HEIGHT;
+    self.autocomplete.dataSource = self;
+    self.autocomplete.hidden = YES;
   
-    keyboardFrame = CGRectZero;
+    self.keyboardFrame = CGRectZero;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     //keyboardFrame
@@ -62,15 +62,15 @@
 -(void)setPlaceholder:(NSString *)placeholder{
 
     _placeholder = placeholder;
-    [self activatePlacehlder:text];
+    [self activatePlacehlder:self.text];
 }
 
 
 -(void)didTap:(UITapGestureRecognizer *)rec{
-    [text becomeFirstResponder];
+    [self.text becomeFirstResponder];
 }
 - (void) keyboardDidHide:(NSNotification*)notification {
-    keyboardFrame = CGRectZero;
+    self.keyboardFrame = CGRectZero;
  //   [self setNeedsLayout];
 }
 
@@ -79,7 +79,7 @@
     
     UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
     UIView *mainSubviewOfWindow = window.rootViewController.view;
-    keyboardFrame = [mainSubviewOfWindow convertRect:keyboardFrameOrig fromView:window];
+    self.keyboardFrame = [mainSubviewOfWindow convertRect:keyboardFrameOrig fromView:window];
     
     [self resizeTable];
     [self setNeedsLayout];
@@ -169,7 +169,7 @@
 
 }
 -(BOOL)resignFirstResponder{
-    [text resignFirstResponder];
+    [self.text resignFirstResponder];
     return [super resignFirstResponder];
 }
 -(void)loadItems:(NSArray *)newItems{
@@ -181,7 +181,7 @@
 }
 
 -(void)resizeTable{
-    CGRect tfr = text.frame;
+    CGRect tfr = self.text.frame;
     // right below the textx
     // delta to keyboard
     
@@ -196,33 +196,33 @@
     UIView *mainSubviewOfWindow = [[window subviews] lastObject];
     CGRect window_fr = [mainSubviewOfWindow convertRect:fr fromView:self];
     
-    if (keyboardFrame.origin.y != 0.0)
-        fr.size.height = MIN(fr.size.height,keyboardFrame.origin.y - window_fr.origin.y);
+    if (self.keyboardFrame.origin.y != 0.0)
+        fr.size.height = MIN(fr.size.height,self.keyboardFrame.origin.y - window_fr.origin.y);
     else{
         //fr.size.height = MIN(fr.size.height,  - window_fr.origin.y);
     }
-    autocomplete.frame =   [mainSubviewOfWindow convertRect:fr fromView:self];
+    self.autocomplete.frame =   [mainSubviewOfWindow convertRect:fr fromView:self];
 
 }
 
 -(void)showAutotable{
     [self resizeTable];
-    autocomplete.hidden = NO;
+    self.autocomplete.hidden = NO;
     
     UIWindow *window = [[[UIApplication sharedApplication] windows]objectAtIndex:0];
     UIView *mainSubviewOfWindow = [[window subviews] lastObject];
-    [mainSubviewOfWindow addSubview:autocomplete];
+    [mainSubviewOfWindow addSubview:self.autocomplete];
     
     //if (self.short_list_mode_on && [self.short_list count])
-    [autocomplete reloadData];
+    [self.autocomplete reloadData];
     
-    [autocomplete scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    [self.autocomplete scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
 }
 
 -(void)hideAutoTable{
-    autocomplete.hidden = YES;
-    [autocomplete removeFromSuperview];
+    self.autocomplete.hidden = YES;
+    [self.autocomplete removeFromSuperview];
 }
 
 -(void)deleteItem:(int)index{
@@ -288,7 +288,7 @@
         x_advance=0.0;
     }
     CGFloat l_width = self.bounds.size.width - x_advance;
-    text.frame = CGRectMake(x_advance, AC_SPACING / 2.0 + row * (AC_TEXT_HEIGHT + AC_SPACING)  ,l_width, AC_TEXT_HEIGHT);
+    self.text.frame = CGRectMake(x_advance, AC_SPACING / 2.0 + row * (AC_TEXT_HEIGHT + AC_SPACING)  ,l_width, AC_TEXT_HEIGHT);
     //[text becomeFirstResponder];
     
     //NSLog(@"Set Text Frame");
@@ -305,13 +305,13 @@
 
 -(void)checkInItem{
     
-    if ([text.text length]==0)
+    if ([self.text.text length]==0)
         return;
     
     
     if (self.allow_new_element)
-        [self addItem:(id<ACAutoCompleteElement>)text.text];
-    text.text = @"";
+        [self addItem:(id<ACAutoCompleteElement>)self.text.text];
+    self.text.text = @"";
     [self layoutSubviews];
     [self adjustScroll];
 }
@@ -319,7 +319,7 @@
 -(void)checkInItem:(id)obj{
     
     [self addItem:obj];
-    text.text = @"";
+    self.text.text = @"";
     [self layoutSubviews];
     [self adjustScroll];
 }
@@ -327,8 +327,8 @@
     [_autoCompleteDataSource getSuggestionsFor:search withCallback:^(NSArray *arr){
        
         self.filtered_autocomp = arr;
-        [autocomplete reloadData];
-        if ([arr count] > 0 && [text.text length] >= 2)
+        [self.autocomplete reloadData];
+        if ([arr count] > 0 && [self.text.text length] >= 2)
             [self showAutotable];
         else
             [self hideAutoTable];
@@ -500,7 +500,7 @@
 }
 
 -(BOOL )becomeFirstResponder{
-    return [text becomeFirstResponder];
+    return [self.text becomeFirstResponder];
 }
 
 @end

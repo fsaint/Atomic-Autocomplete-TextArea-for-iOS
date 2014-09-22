@@ -23,16 +23,14 @@
 @end
 
 
-@interface ACTextArea : UIScrollView <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>{
-    
-    // this two should be the same length
-    // This is fot the input
-    UITextView *text;
-    UITableView *autocomplete;
-    
-    
-    CGRect keyboardFrame;
-}
+@interface ACTextArea : UIScrollView <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>
+
+// this two should be the same length
+// This is fot the input
+@property (nonatomic) UITextView *text;
+@property (nonatomic) UITableView *autocomplete;
+
+@property (nonatomic, assign) CGRect keyboardFrame;
 
 @property (nonatomic,strong) NSArray *short_list;
 

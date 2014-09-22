@@ -9,6 +9,17 @@
 *.perspectivev3
 *.pbxuser
 xcuserdata
+*.xccheckout
+
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+profile
+*.moved-aside
+DerivedData
+*.xccheckout
+
 # Build products
 build/
 *.o
@@ -22,4 +33,9 @@ build/
 *.dep
 # Cocoapods
 Pods
-Podfile.lock
+# AppCode specific files
+.idea/
+*.iml
+# Tests Results
+automation_results
+unit_test_reports

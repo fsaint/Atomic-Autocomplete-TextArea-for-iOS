@@ -48,13 +48,16 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         // delete button
         delete_button = [UIButton buttonWithType:UIButtonTypeCustom];
         UIImage *im = [[UIImage imageNamed:@"delete_sign"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        delete_button.tintColor = [UIColor whiteColor];
+        delete_button.tintColor =[UIColor whiteColor];
+        
         [delete_button setImage:im forState:UIControlStateNormal];
         delete_button.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
         [delete_button addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:delete_button];
         
         self.selected = NO;
+        self.userInteractionEnabled = YES;
+        
         
     }
     return self;

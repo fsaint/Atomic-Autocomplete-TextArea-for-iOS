@@ -13,6 +13,7 @@
 -(NSString *)getDisplayText;
 @optional
 -(NSString *)getDetailText;
+-(NSString *)getCollection;
 @end
 
 @protocol ACAutoCompleteDataSource <NSObject>

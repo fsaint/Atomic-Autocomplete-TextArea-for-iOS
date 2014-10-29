@@ -62,12 +62,30 @@
 -(void)setPlaceholder:(NSString *)placeholder{
 
     _placeholder = placeholder;
+    
     [self activatePlacehlder:self.text];
 }
 
 
 -(void)didTap:(UITapGestureRecognizer *)rec{
-    [self.text becomeFirstResponder];
+    
+    
+    CGPoint location = [rec locationInView:self];
+    BOOL sel = NO;
+    for (int i=0;i<[_bubbles count];i++){
+        ACBubble *bub = _bubbles[i];
+        
+        if (CGRectContainsPoint(bub.frame, location)){
+            bub.selected  = YES;
+            sel = YES;
+        }else{
+            bub.selected = NO;
+        }
+    
+    
+    }
+    if (!sel)
+        [self.text becomeFirstResponder];
 }
 - (void) keyboardDidHide:(NSNotification*)notification {
     self.keyboardFrame = CGRectZero;
@@ -388,9 +406,14 @@
     ACBubble *last = [_bubbles lastObject];
     if ([textView.text length] == 0 && [intex length] ==0){
         
+        
+        
         if (last.selected){
             [self deleteItem:[_bubbles count]-1];
         }else{
+            for (ACBubble *b in _bubbles)
+                b.selected = NO;
+            
             last.selected = YES;
         }
         
@@ -503,5 +526,11 @@
 -(BOOL )becomeFirstResponder{
     return [self.text becomeFirstResponder];
 }
+/*
+-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    //return [_bubbles objectAtIndex:0];
 
+}
+
+ */
 @end

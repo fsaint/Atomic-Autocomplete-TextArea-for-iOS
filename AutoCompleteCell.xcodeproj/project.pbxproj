@@ -21,6 +21,7 @@
 		B53BE9C514DA8AD500013535 /* ACBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BE9C414DA8AD500013535 /* ACBubble.m */; };
 		B53BEA0514DAAFEC00013535 /* ACAddressBookDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BEA0414DAAFEB00013535 /* ACAddressBookDataSource.m */; };
 		B53BEA0714DAB49C00013535 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53BEA0614DAB49C00013535 /* AddressBook.framework */; };
+		B58C988F19F8139A00789F0D /* ACItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C988E19F8139A00789F0D /* ACItemCell.m */; };
 		B5BDC657188F15E90087FCA3 /* ACArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BDC656188F15E90087FCA3 /* ACArrayDataSource.m */; };
 		B5E4AC2A188EEB0200AB23DA /* delete_sign.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E4AC29188EEB0200AB23DA /* delete_sign.png */; };
 		B5E4AC2C188EEB0A00AB23DA /* delete_sign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E4AC2B188EEB0A00AB23DA /* delete_sign@2x.png */; };
@@ -53,6 +54,8 @@
 		B53BEA0314DAAFEB00013535 /* ACAddressBookDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACAddressBookDataSource.h; sourceTree = "<group>"; };
 		B53BEA0414DAAFEB00013535 /* ACAddressBookDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACAddressBookDataSource.m; sourceTree = "<group>"; };
 		B53BEA0614DAB49C00013535 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B58C988D19F8139A00789F0D /* ACItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACItemCell.h; sourceTree = "<group>"; };
+		B58C988E19F8139A00789F0D /* ACItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACItemCell.m; sourceTree = "<group>"; };
 		B5BDC655188F15E90087FCA3 /* ACArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACArrayDataSource.h; sourceTree = "<group>"; };
 		B5BDC656188F15E90087FCA3 /* ACArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACArrayDataSource.m; sourceTree = "<group>"; };
 		B5E4AC29188EEB0200AB23DA /* delete_sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_sign.png; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				B53BEA0414DAAFEB00013535 /* ACAddressBookDataSource.m */,
 				B5BDC655188F15E90087FCA3 /* ACArrayDataSource.h */,
 				B5BDC656188F15E90087FCA3 /* ACArrayDataSource.m */,
+				B58C988D19F8139A00789F0D /* ACItemCell.h */,
+				B58C988E19F8139A00789F0D /* ACItemCell.m */,
 			);
 			name = AutocompleteTextArea;
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 			files = (
 				B53BE99414DA782000013535 /* main.m in Sources */,
 				B53BE99814DA782000013535 /* ACAppDelegate.m in Sources */,
+				B58C988F19F8139A00789F0D /* ACItemCell.m in Sources */,
 				B53BE9A114DA782000013535 /* ACViewController.m in Sources */,
 				B53BE9C214DA78B000013535 /* ACTextArea.m in Sources */,
 				B53BE9C514DA8AD500013535 /* ACBubble.m in Sources */,
